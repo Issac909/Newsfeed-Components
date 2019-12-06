@@ -37,33 +37,26 @@ let menuItems = [
 //Parent
 const menuButton = document.querySelector('.menu-button');
 
-function createMenu(data) {
-  //Parent
-  const menu = document.createElement('div');
-  menu.classList.add('menu');
 
-  //UL
-  const list = document.createElement('ul');
-  menu.appendChild(list);
+function createMenu(arr) {
+  const navigation = document.createElement('div');
+  const navItems = document.createElement('ul');
 
-  //LI
-  menuItems.forEach(data => {
-    const item = document.createElement('li');  
-    menu.textContent = data;
-    list.appendChild(item);
-  })
+  navigation.classList.add('menu');
 
+  arr.forEach(link => {
+    let menuItem = document.createElement('li');
+    menuItem.textContent = link;
+    navItems.appendChild(menuItem);
+  });
 
+  let menuButton = document.querySelector('.menu-button');
+  menuButton.addEventListener('click', () => {
+  navigation.classList.toggle('menu--open');
 
-  menuButton.addEventListener('click', (event) => {
-    console.log(event.target);
-    menu.classList('.menu--open').toggle;
-  })
-
-return menu;
-}
-
-menuItems.forEach(data => {
-  menuButton.appendChild(createMenu(data));
 })
 
+  navigation.appendChild(navItems);
+  return navigation;
+}
+document.querySelector('.header').appendChild(createMenu(menuItems));
